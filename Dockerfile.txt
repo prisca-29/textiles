@@ -1,0 +1,20 @@
+# Use an official TensorFlow image as the base image
+FROM tensorflow/tensorflow:2.14.0
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file to the container
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entire project to the container
+COPY . .
+
+# Expose the port (if you have a web app that serves the model)
+EXPOSE 5000
+
+# Specify the command to run the training script
+CMD ["python", "main.py"]
